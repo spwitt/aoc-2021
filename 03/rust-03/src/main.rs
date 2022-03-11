@@ -4,6 +4,7 @@ fn main() {
     let input_lines = rust_aoc::get_default_input_lines();
 
     let line_length = input_lines[0].len();
+    // check that all lines have the same length
     assert!(input_lines.iter().all(|l| l.len() == line_length));
 
     let input_values: Vec<i32> = input_lines.iter().map(|l| i32::from_str_radix(l, 2).unwrap()).collect();
