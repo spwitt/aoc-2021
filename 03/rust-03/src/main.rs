@@ -7,18 +7,20 @@ fn main() {
     // check that all lines have the same length
     assert!(input_lines.iter().all(|l| l.len() == line_length));
 
-    let input_values: Vec<i32> = input_lines.iter().map(|l| i32::from_str_radix(l, 2).unwrap()).collect();
-    let mut ones_count = Vec::<usize>::new();
-    ones_count.resize(line_length, 0);
+    let input_values: Vec<usize> = input_lines.iter().map(|l| usize::from_str_radix(l, 2).unwrap()).collect();
+    p1(&input_values, line_length);
+}
 
-    for val in input_values {
-        let mut bit_mask = 1;
-        for i in 0..line_length {
-            if val & bit_mask > 0 {
-                ones_count[i] += 1;
-            }
-            bit_mask = bit_mask << 1;
-        }
+fn get_count_match_bitmask(values: &[usize], bitmask: usize) -> usize {
+    values.iter().filter(|&v| v & bitmask > 0).count()
+}
+
+fn p1(values: &[usize], line_length: usize) {
+    let mut ones_count = Vec::<usize>::new();
+    let mut bitmask = 1;
+    for _ in 0..line_length {
+        ones_count.push(get_count_match_bitmask(values, bitmask));
+        bitmask = bitmask << 1;
     }
 
     // build binary strings for the gamma and epsilon values
@@ -27,7 +29,7 @@ fn main() {
 
     // reverse ones_count vector so that we start with most significant bit and can append to strings
     for c in ones_count.into_iter().rev() {
-        if c > input_lines.len() / 2 {
+        if c > values.len() / 2 {
             // more than half of bits in this position were 1s
             gamma_str.push('1');
             epsilon_str.push('0');
@@ -38,12 +40,11 @@ fn main() {
         }
     }
 
-    let gamma_rate = i32::from_str_radix(&gamma_str, 2).unwrap();
-    let epsilon_rate = i32::from_str_radix(&epsilon_str, 2).unwrap();
+    let gamma_rate = usize::from_str_radix(&gamma_str, 2).unwrap();
+    let epsilon_rate = usize::from_str_radix(&epsilon_str, 2).unwrap();
 
     println!("--- Part I ---");
     println!("Gamma rate: {}", gamma_rate);
     println!("Epsilon rate: {}", epsilon_rate);
     println!("Power consumption: {}", gamma_rate * epsilon_rate);
 }
-
