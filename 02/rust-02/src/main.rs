@@ -2,18 +2,38 @@ use std::{fs, env};
 
 fn main() {
     let lines = get_input_lines(&get_input_path());
-    let instructions = lines
+    let instructions: Vec<Instruction> = lines
         .iter()
-        .map(|l| string_to_instruction(l));
+        .map(|l| string_to_instruction(l))
+        .collect();
     let mut pos = 0;
     let mut depth = 0;
-    for inst in instructions {
+    for inst in instructions.iter() {
         match inst {
             Instruction::Forward(units) => pos += units,
             Instruction::Up(units) => depth -= units,
             Instruction::Down(units) => depth += units
         }
     }
+    println!("---Part I---");
+    println!("Position: {}", pos);
+    println!("Depth: {}", depth);
+    println!("Product: {}", pos * depth);
+
+    let mut pos = 0;
+    let mut depth = 0;
+    let mut aim = 0;
+    for inst in instructions.iter() {
+        match inst {
+            Instruction::Forward(units) => {
+                pos += units;
+                depth += aim * units
+            },
+            Instruction::Up(units) => aim -= units,
+            Instruction::Down(units) => aim += units
+        }
+    }
+    println!("---Part II---");
     println!("Position: {}", pos);
     println!("Depth: {}", depth);
     println!("Product: {}", pos * depth);
