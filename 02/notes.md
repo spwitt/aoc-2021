@@ -24,3 +24,8 @@ Follow the steps in the [input](https://adventofcode.com/2021/day/2/input). Mult
 The instructions remain the same, but rather than `up` and `down` controlling depth, they adjust a new `aim` value. A `forward` instruction increases the horizontal position of the submarine _and_ adjusts the depth by the value multiplied by the current `aim` value.
 
 It's a simple adjustment to re-iterate the instructions that were created in Part I using a separate `match` statement for adjusting the position and depth.
+
+## Commentary
+I considered creating a separate library at this point to handle loading and parsing the contents of puzzle input into `Vec<String>`. I decided against it because I quickly realized that by using more correct methods on the `String` read from the input file, the helper methods would havae been almost trivial.
+
+I expect I'll revisit the idea of a helper library to parse input files if input files become more complex or as practice creating a standalone library project with proper error handling and testing.
