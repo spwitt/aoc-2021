@@ -1,4 +1,4 @@
-The goal of the puzzle is to count the number of times a depth reading from the [puzzle input](https://adventofcode.com/2021/day/1/input) increases over the previous value.
+The goal of the [puzzle](https://adventofcode.com/2021/day/1) is to count the number of times a depth reading from the [puzzle input](https://adventofcode.com/2021/day/1/input) increases over the previous value.
 
 In the second part of the puzzle the sums for overlapping groups of 3 elements were calculated and then counted the number of increases between elements of those sums.
 
