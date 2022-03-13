@@ -19,3 +19,8 @@ Unfortunately my code for the first part does not play so nicely with this secon
 My first thought was to partition the remaining set each time, but that only works for checking the first bit. After the first bit is processed, the two sets of values we operate on are changed.
 
 The first pass at the solution did not yield the expected result. I used the sample data given in the puzzle description for further testing and realized that I had issues with integer division. When comparing whether the count of 1s to check whether it was more or less than half the remaining values, I was performing integer division on the length of the vector. This was sometimes causing the program to keep the opposite of the values that it should for the next iteration.
+
+## Commentary
+One interesting thing about the puzzles for day 3 is that my solution for the first part did not flow as neatly into the second part like it did for the other puzzles. I had to refactor my solution for part 1 to make the code reusable for part 2. My gut reaction was that it was more efficient to check each digit on a given value before moving on to the next value, but it is the same number of total iterations whether you check all bits before moving to the next value or check the one bit across all values.
+
+The code could be improved by combining the `find_oxy_rating` and `find_co2_rating` functions. They only differ in the comparison that they perform to filter values.
